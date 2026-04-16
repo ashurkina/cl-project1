@@ -1,0 +1,5 @@
+pandas
+nltk
+matplotlib
+google-play-scraper
+langdetect
