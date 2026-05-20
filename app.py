@@ -6,20 +6,21 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
+#добавляем декоратор чтобы сохранить csv в кэш
 @st.cache_data
 def load_data():
 
     df = pd.read_csv(
-        "data/chatgpt_reviews_clean_balanced.csv"
+        "data/chatgpt_reviews_clean_balanced.csv" #загружаем файл
     )
 
-    df["content"] = df["content"].astype(str)
+    df["content"] = df["content"].astype(str) #сохраняем отзывы
 
     return df
 
-
+#сохраняем объект в кэш
 @st.cache_resource
-def build_model(texts):
+def build_model(texts): #функция чтобы построить модель
 
     vectorizer = TfidfVectorizer(
         stop_words='english',
@@ -28,10 +29,10 @@ def build_model(texts):
 
     X = vectorizer.fit_transform(texts)
 
-    return vectorizer, X
+    return vectorizer, X 
 
 
-df = load_data()
+df = load_data() #загружаем данные
 
 vectorizer, X = build_model(
     df["content"]
@@ -53,7 +54,7 @@ top_n = st.slider(
 )
 
 
-if query:
+if query: #если пользователь вводит строку
 
     query_vector = vectorizer.transform(
         [query]
@@ -85,7 +86,7 @@ if query:
     for idx in indices:
 
         st.write(
-            f"Cosine similarity: {similarity[idx]:.3f}, Score: {df.iloc[idx]["score"]}"
+            f"Cosine Similarity: {similarity[idx]:.3f}, Оценка: {df.iloc[idx]["score"]}"
         )
 
         st.info(
