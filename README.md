@@ -1,4 +1,4 @@
-# Sentiment and Discourse Analysis of ChatGPT App Reviews (Rule-Based Approach)
+# Sentiment and Discourse Analysis of ChatGPT App Reviews
 
 ![alt text](./app_frontend.png)
 
